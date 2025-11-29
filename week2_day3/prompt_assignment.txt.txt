@@ -1,0 +1,26 @@
+Context : As an  automation   Engineer been expertise in banking domain , need to prepare test data for credit card application .
+
+Instruction:
+[Critical] Generate test data for different types of credit cards
+[Mandatory] Ensure test data covered for all the eligibility criteria
+[Mandatory] Generate data based on the types of card
+[Exclude] Student Credit card
+[Mandatory] Generate  all the possible parameters please refer EXAMPLE 
+[İNCLUDE] Generate Positive as well as negative test data 
+DO NOT cover non functional test data
+[Mandatory] Generate atleast 10 sets of data for each type
+
+EXAMPLE:
+Card type 
+Age 
+Salary
+Limit
+Validity
+Credit score
+Ratings 
+
+OUTPUT: 
+Generate test data in excel format 
+
+Persona: 
+As a ai assistant , Review the testdata and prioritise based on credit score
