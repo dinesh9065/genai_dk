@@ -1,0 +1,93 @@
+CONTEXT : As a SDET being expertise in Playwright with typescript
+
+
+INSTRUCTIONS:
+
+Please follow the below steps,
+
+1.[MANDATORY] CONVERT selenium with java code into  playwright with typescript code by referring the selenium code provided below 
+2.[CRITICAL] Generate a Playwright with typescript project using Node js and npm
+3.[MANDATORY] Generate all the locators in the spec.ts file
+4. DO NOT CREATE Page object model design pattern
+5. [MADNATORY] Hard code the page URL in the spec.ts file 
+4.[MANDATORY] Generate BeforeALL for driver launch and AfterALL for driver quit
+5. DO NOT INVENT new test cases.
+6. [MANDATORY] Use the locators from the selenium code , DO NOT add new locators 
+
+
+Persona: As a Automation architect , review the code and add necessary update wherever necessary to make it as a workable code.
+
+{SELENIUM CODE}: 
+package tests;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.*;
+import pages.LoginPage;
+import java.time.Duration;
+
+public class test {
+    private WebDriver driver;
+ 
+
+    @BeforeMethod
+    public void setup() {
+        // Read config
+        String url = "https://opensource-demo.orangehrmlive.com/";
+String browser = "chrome";
+        // Initialize driver using WebDriverManager as required
+        if ("chrome".equalsIgnoreCase(browser)) {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+        } else {
+            throw new RuntimeException("Only chrome supported in this sample");
+        }
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        driver.get(url);
+
+        loginPage = new LoginPage(driver);
+    }
+
+    @Test(description = "Verify user can login with valid credentials")
+    public void testLogin() {
+
+        // Perform actions
+        loginPage.setUsername("Admin");
+        loginPage.setPassword("admin123");
+        loginPage.clickLogin();
+
+        // Basic assertion: after login, URL should change or title contains 'Dashboard' - this demo uses URL check
+        String currentUrl = driver.getCurrentUrl();
+        
+        }
+
+    @AfterMethod
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+        if (extent != null) {
+            extent.flush();
+        }
+    }
+}
+
+
+OUTPUT:
+Generate Playwright with typescript code.
+[test.spec.ts]:
+import { test,expect} from '@playwright/test';/n 
+test("Navigate To Admin Page", async ({page}) => {
+ await page.getByText('Admin').click();
+})
+[page Class]:
+import {Locator,Page} from '@playwright/test';
+export class LoginPage{
+readonly usernameInput : Locator ;
+constructor(page){
+this.page = page
+this.usernameInput = page.getByRole('textbox', {name:'userna
+}
+ 

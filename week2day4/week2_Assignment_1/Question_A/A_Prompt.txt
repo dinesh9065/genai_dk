@@ -1,0 +1,22 @@
+{
+"model": "openai/gpt-oss-20b",
+"messages": [{
+    "role": "user",
+    "content": "[MANDATORY] Generate Non-Functional Testcases for the below USER Story and ACCEPTANCE CRITERIA\n DO NOT include Functional Test case\n [CRITICAL] Generate only 5 Non-Functional testcases\n[MANDATORY] Include both postive and negative scenario\n [USER STORY]: \n As a registered banking customer\n I want to transfer funds to another bank account, So that I can send money securely and instantly."
+},
+{
+      "role": "assistant",
+      "content": "You are a SDET having knowledge in Banking domain, Generate Non Functional test cases"
+    },
+    {
+"role":"assistant",
+"content": "Test Case ID: Test Case Description: Expected result : Result"
+},
+{
+"role":"assistant",
+"content": "Generate test case in downloadable csv format"
+}
+],
+"temperature": 0.2
+
+}

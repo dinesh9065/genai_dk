@@ -1,0 +1,186 @@
+I want to generate an API automation where I am using Rest assured with java. generate this test case where I am using POST request. Before generating this file, please ask multiple choice questions, like one question at a time, totally five questions, keep the questions simple. So go one by one, like one by one questions at a time, and after getting the answer of one question, go to the next question. After completing these five questions, generate me the file.
+
+
+
+
+
+
+Response:
+Great! I will ask one question at a time (multiple-choice), and once all 5 questions are completed, I will generate your POST API automation test script using Rest Assured + Java based on your answers.
+
+✅ Question 1 of 5
+
+What type of API are you testing?
+
+A. User Creation API
+B. Login API
+C. Payment API
+D. Generic POST API
+
+👉 Please reply with A, B, C, or D.
+
+You said:
+A
+ChatGPT said:
+
+Great! User Creation API selected.
+
+✅ Question 2 of 5
+
+Which format do you want to use for the request body?
+
+A. JSON
+B. Form Data
+C. Raw String
+D. XML
+
+👉 Please reply with A, B, C, or D.
+
+You said:
+A
+ChatGPT said:
+
+Perfect — JSON request body selected.
+
+✅ Question 3 of 5
+
+Where do you want to provide the Base URL?
+
+A. Hardcoded inside the test file
+B. From a config file (config.properties)
+C. From environment variable
+D. From user input (Scanner)
+
+👉 Please reply with A, B, C, or D.
+
+You said:
+C
+ChatGPT said:
+
+Great — Base URL from Environment Variable selected.
+
+✅ Question 4 of 5
+
+What response validation do you want?
+
+A. Only Status Code
+B. Status Code + Response Body Field Check
+C. Status Code + Schema Validation
+D. Full Validation (Status + Body Fields + Headers)
+
+👉 Please reply with A, B, C, or D.
+
+You said:
+A
+ChatGPT said:
+
+Got it — Validate only Status Code selected.
+
+✅ Question 5 of 5
+
+Which test structure do you prefer?
+
+A. Simple main() method (standalone execution)
+B. TestNG test case
+C. JUnit test case
+D. Reusable utility class + Test class
+
+👉 Please reply with A, B, C, or D.
+
+You said:
+B
+ChatGPT said:
+
+Great — you selected TestNG.
+
+Here are your choices:
+
+1️⃣ User Creation API
+2️⃣ JSON Body
+3️⃣ Base URL from Environment Variable
+4️⃣ Validate Only Status Code
+5️⃣ TestNG Structure
+
+✅ Generated API Automation Test (POST) — Rest Assured + Java + TestNG
+
+Below is your full Java test file based on the answers you provided:
+
+package api.tests;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import static io.restassured.RestAssured.given;
+
+public class CreateUserAPITest {
+
+    private String baseUrl;
+
+    @BeforeClass
+    public void setup() {
+        // Base URL fetched from Environment Variable
+        baseUrl = System.getenv("BASE_URL");
+        if (baseUrl == null) {
+            throw new RuntimeException("BASE_URL environment variable is not set!");
+        }
+
+        RestAssured.baseURI = baseUrl;
+    }
+
+    @Test
+    public void testCreateUser() {
+
+        // JSON Request Body for User Creation API
+        String requestBody = "{\n" +
+                "  \"name\": \"John Doe\",\n" +
+                "  \"email\": \"john.doe@example.com\",\n" +
+                "  \"password\": \"Test@123\"\n" +
+                "}";
+
+        // POST request
+        Response response = 
+                given()
+                    .header("Content-Type", "application/json")
+                    .body(requestBody)
+                .when()
+                    .post("/users/create")   // Sample endpoint, you may replace it
+                .then()
+                    .extract()
+                    .response();
+
+        // Validate ONLY Status Code (As selected)
+        Assert.assertEquals(response.getStatusCode(), 201, "Status code validation failed!");
+
+        System.out.println("Response Status Code: " + response.getStatusCode());
+        System.out.println("Response Body: " + response.getBody().asString());
+    }
+}
+
+✅ What You Need for This Test to Run
+1. Set Environment Variable
+
+Before running the test:
+
+Windows (PowerShell):
+
+setx BASE_URL "https://api.example.com"
+
+
+Mac/Linux:
+
+export BASE_URL="https://api.example.com"
+
+✅ What’s Included
+
+✔ POST request
+✔ JSON request body
+✔ Base URL fetched from environment variable
+✔ TestNG setup
+✔ Single status-code validation
+✔ Clean & industry-grade structure
+
+
+

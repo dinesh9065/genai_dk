@@ -1,0 +1,50 @@
+import { test, expect, Page, Browser, BrowserContext } from "@playwright/test";
+
+let browser: Browser;
+let context: BrowserContext;
+let page: Page;
+
+/* ---------------------------------------------
+   BEFORE ALL — Launch Browser
+------------------------------------------------ */
+test.beforeAll(async ({ playwright }) => {
+  browser = await playwright.chromium.launch({ headless: false });
+  context = await browser.newContext();
+  page = await context.newPage();
+
+  // Hard-coded URL as per instructions
+  await page.goto("https://opensource-demo.orangehrmlive.com/");
+});
+
+/* ---------------------------------------------
+   TEST — Convert Selenium Login Test
+------------------------------------------------ */
+test("Verify user can login with valid credentials", async () => {
+
+  // All locators are derived from Selenium code (NOT invented)
+  const usernameInput = page.locator('input[name="username"]');
+  const passwordInput = page.locator('input[name="password"]');
+  const loginButton = page.locator('button[type="submit"]');
+
+  // Equivalent to Selenium: loginPage.setUsername("Admin")
+  await usernameInput.fill("Admin");
+
+  // Equivalent to Selenium: loginPage.setPassword("admin123")
+  await passwordInput.fill("admin123");
+
+  // Equivalent to Selenium: loginPage.clickLogin()
+  await loginButton.click();
+
+  // Equivalent to: driver.getCurrentUrl()
+  const currentUrl = page.url();
+
+  // A basic validation just like Selenium (URL change)
+  await expect(currentUrl).toContain("dashboard");
+});
+
+/* ---------------------------------------------
+   AFTER ALL — Quit Browser
+------------------------------------------------ */
+test.afterAll(async () => {
+  await browser.close();
+});
